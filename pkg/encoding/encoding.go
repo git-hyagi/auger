@@ -228,9 +228,19 @@ func newCodec(typeMeta *runtime.TypeMeta, mediaType string) (runtime.Codec, erro
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse meta APIVersion '%s': %s", typeMeta.APIVersion, err)
 	}
+
+	var decoder runtime.Decoder
+	var codec runtime.Codec
 	encoder := cfactory.EncoderForVersion(info.Serializer, gv)
-	decoder := cfactory.DecoderToVersion(info.Serializer, gv)
-	codec := cfactory.CodecForVersions(encoder, decoder, gv, gv)
+
+	if gv.String() != "v1" {
+		decoder = tryDecodeOCPObject(gv)
+		codec = tryCodecOCPObject(encoder, decoder, gv)
+	} else {
+		decoder = cfactory.DecoderToVersion(info.Serializer, gv)
+		codec = cfactory.CodecForVersions(encoder, decoder, gv, gv)
+	}
+
 	return codec, nil
 }
 

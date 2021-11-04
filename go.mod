@@ -13,6 +13,7 @@ require (
 	github.com/google/gofuzz v0.0.0-20161122191042-44d81051d367 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/json-iterator/go v0.0.0-20171212105241-13f86432b882 // indirect
+	github.com/openshift/api v0.0.0-20200312145924-779a333deb13  // indirect
 	github.com/spf13/cobra v0.0.1
 	github.com/spf13/pflag v1.0.0 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
